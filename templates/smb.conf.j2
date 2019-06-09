@@ -24,6 +24,7 @@
   log level = {{ samba_log_level }}
 {% else %}
   logging = syslog
+  log level = {{ samba_log_level }}
 {% endif %}
 
   # Authentication
@@ -143,4 +144,3 @@
 
 {% endfor %}
 {% endif%}
-
