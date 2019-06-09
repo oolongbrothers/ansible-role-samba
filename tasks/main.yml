@@ -59,6 +59,7 @@
     group: "{{ item.group|default('users') }}"
     mode: "{{ item.directory_mode|default('0775') }}"
     setype: "{{ item.setype|default('samba_share_t') }}"
+  when: create_share_directory is defined and create_share_directory == true
   tags: samba
 
 - name: Ensure webserver document root exists
@@ -85,7 +86,7 @@
   notify:
     - Restart Samba services
   tags: samba
-  
+
 - name: Install global include file
   template:
     src: "{{ samba_global_include }}"
@@ -94,7 +95,7 @@
   when: samba_global_include is defined
   notify:
     - Restart Samba services
-  
+
 - name: Install homes include file
   template:
     src: "{{ samba_homes_include }}"
